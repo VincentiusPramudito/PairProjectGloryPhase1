@@ -35,6 +35,21 @@ routes.get('/login', (req,res)=>{
 })
 // go to loginPage
 
+routes.post('/login', (req,res)=>{
+    console.log(req.body)
+    Model.Customer.findAll({
+        where: {
+            email: req.body.email
+        }
+    })
+    .then(data =>{
+        // console.log(data.password, req.body.password)
+        if(data[0].password === req.body.password){
+            res.send('BENARRR')
+        }
+    })
+})
+
 
 routes.get('/login/:id/transaction', (req,res)=>{
     Model.Transaction.create({
