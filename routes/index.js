@@ -3,17 +3,17 @@ const Model = require('../models')
 
 // go to HomePage
 routes.get('/', (req,res)=>{
-    res.send('Masuk Pak Ekoooo')
+    res.render('home')
 })
 // go to HomePage
 
 // go to RegisterPage
 routes.get('/register', (req,res)=>{
-    res.render('halamanRegister????')
+    res.render('register')
 })
 // go to RegisterPage
 
-// create new Customer
+// // create new Customer
 routes.post('/register', (req,res)=>{
     Model.Customer.create({
         name: req.body.name,
@@ -21,7 +21,7 @@ routes.post('/register', (req,res)=>{
         password: req.body.password
     })
     .then(()=>{
-        res.send('Syudah daptarr')
+        res.render('home')
     })
     .catch(err =>{
         res.send(err)
@@ -30,25 +30,13 @@ routes.post('/register', (req,res)=>{
 // create new Customer
 
 // go to loginPage
-router.get('/login', (req,res)=>{
-    Model.Customer.findOne({
-        where: {
-            email: req.body.email
-        }
-    })
-    .then(data =>{
-        if(data.password == req.body.password){
-            res.send('Halaman User..')
-        }
-    })
-    .catch(err =>{
-        res.send(err)
-    })
+routes.get('/login', (req,res)=>{
+    res.render('login')
 })
 // go to loginPage
 
 
-router.get('/login/:id/transaction', (req,res)=>{
+routes.get('/login/:id/transaction', (req,res)=>{
     Model.Transaction.create({
         CustomerId: req.params.id
     })
@@ -57,6 +45,6 @@ router.get('/login/:id/transaction', (req,res)=>{
     })
 })
 
-router.get('/')
+routes.get('/')
 
 module.exports = routes
