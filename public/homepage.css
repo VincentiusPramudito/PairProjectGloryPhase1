@@ -1,0 +1,11 @@
+judul.img {
+    position: fixed;
+    width: 100%;
+    height: 100%
+}
+
+tentangKami.img {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+}
