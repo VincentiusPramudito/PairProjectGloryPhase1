@@ -1,0 +1,18 @@
+span.navigasi ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+span.navigasi ul li {
+    float: right;
+}
+
+span.navigasi ul li a {
+    display: block;
+    color: burlywood;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
