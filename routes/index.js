@@ -1,6 +1,6 @@
 const routes = require('express').Router()
 const Model = require('../models')
-const 
+// const session = req('express-session')
 
 // go to HomePage
 routes.get('/', (req,res)=>{
@@ -37,18 +37,25 @@ routes.get('/login', (req,res)=>{
 // go to loginPage
 
 routes.post('/login', (req,res)=>{
-    // console.log(req.body)
-    Model.Customer.findAll({
+    console.log(req.body)
+    Model.Customer.findOne({
         where: {
             email: req.body.email
         }
     })
     .then(data =>{
-        // console.log(data.password, req.body.password)
-        if(data[0].password === req.body.password){
-            res.send('BENARRR')
+        console.log(data)
+        if(data[0].password == req.body.password){
+            res.send(data)
         }
     })
+    .catch(err =>{
+        res.send(err)
+    })
+})
+
+routes.get('/login/menu', (req,res)=>{
+    res.render('menu')
 })
 
 
@@ -61,6 +68,11 @@ routes.get('/login/:id/transaction', (req,res)=>{
     })
 })
 
-routes.get('/')
+routes.get('/summary', (req,res)=>{
+    Model.MenuTransaction.findAll()
+    .then(datas =>{
+        res.send(datas)
+    })
+})
 
 module.exports = routes
