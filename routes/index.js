@@ -61,7 +61,7 @@ routes.get('/login/menu/:id', (req,res)=>{
 })
 routes.post('/login/menu/:id', (req,res)=>{
     // console.log(req.params.id)
-    console.log(req.body.id, req.params.id)
+    // console.log(req.body.id, req.params.id)
     Model.Transaction.create({
         CustomerId: req.params.id,
         MenuId: req.body.id
@@ -75,10 +75,14 @@ routes.post('/login/menu/:id', (req,res)=>{
 })
 
 routes.get('/login/menu/:id/checkout', (req,res)=>{
-    Model.Transaction.findAll()
+    Promise.all([
+        Model.Menu.findAll(),
+        Model.Transaction.findAll(),
+        Model.Customer.findAll()
+    ])
     .then(datas =>{
-        console.log(datas)
-        res.render('invoice', {values:datas})
+        res.render('invoice')
+        // res.send(datas)
     })
     .catch(err =>{
         res.send(err)
