@@ -14,10 +14,25 @@
 <body>
     <table>
         <tr>
-            <form action="", method="post">
-                <input type="checkbox" name="name" value="kopiSusu"> Kopi Susu<br>
-                <input type="checkbox" name="name" value="kopiJahe"> Kopi Jahe<br>
-                <input type="checkbox" name="name" value="kopiItem" checked> Kopi Item<br> 
+            <form action="/login/menu/<%= UserId %>" method="post">
+                
+                <table border="1">
+                        <tr>
+                            <td>Nama Product</td>
+                            <td>Price</td>
+                            
+                        </tr>
+                    <% values.forEach(e =>{ %>
+                        <tr>
+                            <td><%= e.name %></td>
+                            <td><%= e.harga %></td>
+                            <input type="hidden" name="name" value="<%= e.name %>" />
+                            <input type="hidden" name="harga" value="<%= e.harga %>" />
+                            <td><input type="submit" name="submit" value="Add Item to Cart" /></td>
+                        </tr>
+                    <% }) %>
+                </table>
+                <!-- <input type="text" name="quantity" value="" /></p> -->
             </form>
         </tr>
     </table>

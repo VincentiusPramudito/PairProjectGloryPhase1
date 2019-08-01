@@ -37,25 +37,40 @@ routes.get('/login', (req,res)=>{
 // go to loginPage
 
 routes.post('/login', (req,res)=>{
-    console.log(req.body)
     Model.Customer.findOne({
         where: {
-            email: req.body.email
+            email: req.body.email,
+            password: req.body.password
         }
     })
     .then(data =>{
-        console.log(data)
-        if(data[0].password == req.body.password){
-            res.send(data)
-        }
+        res.redirect(`/login/menu/${data.id}`)
     })
     .catch(err =>{
         res.send(err)
     })
 })
 
-routes.get('/login/menu', (req,res)=>{
-    res.render('menu')
+routes.get('/login/menu/:id', (req,res)=>{
+    console.log(req.params.id)
+    Model.Menu.findAll()
+    .then(data =>{
+        res.render('menu', {values:data, UserId:req.params.id})
+        // res.send(data)
+    })
+})
+
+routes.post('/login/menu/:id', (req,res)=>{
+    console.log(req.params.id)
+    Model.Transaction.create({
+        CustomerId: req.params.id
+    })
+    .then(()=>{
+
+    })
+    .catch(err =>{
+        res.send(err)
+    })
 })
 
 
@@ -65,13 +80,6 @@ routes.get('/login/:id/transaction', (req,res)=>{
     })
     .then(()=>{
 
-    })
-})
-
-routes.get('/summary', (req,res)=>{
-    Model.MenuTransaction.findAll()
-    .then(datas =>{
-        res.send(datas)
     })
 })
 
