@@ -4,12 +4,13 @@ module.exports = (sequelize, DataTypes) => {
     class Transaction extends Model {}
     Transaction.init({
         CustomerId: DataTypes.INTEGER,
+        MenuId: DataTypes.INTEGER
     }, {
         sequelize
     });
     Transaction.associate = function(models) {
         // associations can be defined here
-    // Transaction.hasMany(models.Customer)
+    Transaction.belongsTo(models.Customer)
     // Transaction.belongsToMany(models.Menu, { through: models.MenuTransaction })
     };
     return Transaction;

@@ -60,14 +60,25 @@ routes.get('/login/menu/:id', (req,res)=>{
     })
 })
 routes.post('/login/menu/:id', (req,res)=>{
-    console.log(req.params.id)
+    // console.log(req.params.id)
+    console.log(req.body.id, req.params.id)
     Model.Transaction.create({
-        CustomerId: req.params.id
+        CustomerId: req.params.id,
+        MenuId: req.body.id
     })
-    .then(()=>{
+    .then(data =>{
+        res.redirect(`${req.params.id}`)
+    })
+    .catch(err =>{
+        res.send(err)
+    })
+})
 
-
-            })
+routes.get('/login/menu/:id/checkout', (req,res)=>{
+    Model.Transaction.findAll()
+    .then(datas =>{
+        console.log(datas)
+        res.render('invoice', {values:datas})
     })
     .catch(err =>{
         res.send(err)
