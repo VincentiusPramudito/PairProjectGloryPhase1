@@ -1,5 +1,6 @@
 const routes = require('express').Router()
 const Model = require('../models')
+const 
 
 // go to HomePage
 routes.get('/', (req, res) => {
@@ -34,9 +35,9 @@ routes.get('/login', (req, res) => {
         res.render('login')
     })
     // go to loginPage
+routes.post('/login', (req,res)=>{
+    // console.log(req.body)
 
-routes.post('/login', (req, res) => {
-    console.log(req.body)
     Model.Customer.findAll({
             where: {
                 email: req.body.email
