@@ -1,6 +1,6 @@
 const routes = require('express').Router()
 const Model = require('../models')
-const 
+// const session = req('express-session')
 
 // go to HomePage
 routes.get('/', (req, res) => {
@@ -36,31 +36,52 @@ routes.get('/login', (req, res) => {
     })
     // go to loginPage
 routes.post('/login', (req,res)=>{
-    // console.log(req.body)
 
-    Model.Customer.findAll({
-            where: {
-                email: req.body.email
-            }
-        })
-        .then(data => {
-            // console.log(data.password, req.body.password)
-            if (data[0].password === req.body.password) {
-                res.send('BENARRR')
-            }
-        })
+    Model.Customer.findOne({
+        where: {
+            email: req.body.email,
+            password: req.body.password
+        }
+    })
+    .then(data =>{
+        res.redirect(`/login/menu/${data.id}`)
+    })
+    .catch(err =>{
+        res.send(err)
+    })
 })
 
+routes.get('/login/menu/:id', (req,res)=>{
+    console.log(req.params.id)
+    Model.Menu.findAll()
+    .then(data =>{
+        res.render('menu', {values:data, UserId:req.params.id})
+        // res.send(data)
+    })
+})
+routes.post('/login/menu/:id', (req,res)=>{
+    console.log(req.params.id)
+    Model.Transaction.create({
+        CustomerId: req.params.id
+    })
+    .then(()=>{
 
-routes.get('/login/:id/transaction', (req, res) => {
-        Model.Transaction.create({
-                CustomerId: req.params.id
-            })
-            .then(() => {
 
             })
     })
-    // Routes Update
-routes.get('/')
+    .catch(err =>{
+        res.send(err)
+    })
+})
+
+
+routes.get('/login/:id/transaction', (req,res)=>{
+    Model.Transaction.create({
+        CustomerId: req.params.id
+    })
+    .then(()=>{
+
+    })
+})
 
 module.exports = routes

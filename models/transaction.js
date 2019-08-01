@@ -9,7 +9,8 @@ module.exports = (sequelize, DataTypes) => {
     });
     Transaction.associate = function(models) {
         // associations can be defined here
+    // Transaction.hasMany(models.Customer)
+    // Transaction.belongsToMany(models.Menu, { through: models.MenuTransaction })
     };
-
     return Transaction;
 };
