@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Kopi Susuku Bukan Susumu</title>
+    <title>Rayakan Keberagaman Budaya dan Cita Rasa</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="main.css">
 
@@ -17,35 +17,30 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
     </script>
     <link rel="stylesheet" href="home.css">
+    <link rel="stylesheet" href="menu.css">
 </head>
+
 <body>
 
     <!-- HEADER NAVIGATION AND LOGO BAR-->
-    <div class="container-fuid">
-        <span class="logo"></span>
-        <a class="navbarlogo" href="#">
-            <h1>Kopi Susuku</h1>
-        </a>
-        <h2>Rayakan Kekayaan Budaya dan Cita Rasa Khas Indonesia</h2>
-        <span class="navigasi">
-            <ul>
-                <li><a href="" class="navbar" id="login">MENU</a></li>
-                <li><a href="/login" class="navbar" id="menu">LOGIN</a></li>
-                <li><a href="/register" class="navbar" id="title">REGISTER</a></li>
-            </ul>
-        </span>
-    </div>
+
+    <%- include('./partial/navbar.ejs') %>
+
+        </div>
+        <div class="display-container animate-opacity">
+            <img src="images/551667-PK2X49-186.jpg" alt="" style="width:100%;min-height:380px;max-height:600px;">
+        </div>
+
+        <!-- MENU -->
+        <span class="menu">
+        <h1>OUR MENU</h1>
+        <a href="#menu"><img class="rounded mx-auto d-block" src="images/menu1.jpg" alt=""></a>
+    </span>
 
 
-
-
-
-    <div class="container">
-
-
-    </div>
 
 
 
 </body>
+
 </html>

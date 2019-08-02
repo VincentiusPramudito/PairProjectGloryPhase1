@@ -1,6 +1,6 @@
 const routes = require('express').Router()
 const Model = require('../models')
-// const session = req('express-session')
+    // const session = req('express-session')
 
 // go to HomePage
 routes.get('/', (req, res) => {
@@ -35,53 +35,48 @@ routes.get('/login', (req, res) => {
         res.render('login')
     })
     // go to loginPage
-routes.post('/login', (req,res)=>{
+routes.post('/login', (req, res) => {
 
     Model.Customer.findOne({
-        where: {
-            email: req.body.email,
-            password: req.body.password
-        }
-    })
-    .then(data =>{
-        res.redirect(`/login/menu/${data.id}`)
-    })
-    .catch(err =>{
-        res.send(err)
-    })
+            where: {
+                email: req.body.email,
+                password: req.body.password
+            }
+        })
+        .then(data => {
+            res.redirect(`/login/menu/${data.id}`)
+        })
+        .catch(err => {
+            res.send(err)
+        })
 })
 
-routes.get('/login/menu/:id', (req,res)=>{
+routes.get('/login/menu/:id', (req, res) => {
     console.log(req.params.id)
     Model.Menu.findAll()
-    .then(data =>{
-        res.render('menu', {values:data, UserId:req.params.id})
-        // res.send(data)
-    })
+        .then(data => {
+            res.render('menu', {
+                    values: data,
+                    UserId: req.params.id
+                })
+                // res.send(data)
+        })
 })
-routes.post('/login/menu/:id', (req,res)=>{
+routes.post('/login/menu/:id', (req, res) => {
     console.log(req.params.id)
     Model.Transaction.create({
         CustomerId: req.params.id
     })
-    .then(()=>{
-
-
-            })
-    })
-    .catch(err =>{
-        res.send(err)
-    })
 })
 
 
-routes.get('/login/:id/transaction', (req,res)=>{
+routes.get('/login/:id/transaction', (req, res) => {
     Model.Transaction.create({
-        CustomerId: req.params.id
-    })
-    .then(()=>{
+            CustomerId: req.params.id
+        })
+        .then(() => {
 
-    })
+        })
 })
 
 module.exports = routes
