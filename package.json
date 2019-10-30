@@ -7,7 +7,7 @@
     "ejs": "^2.6.2",
     "express": "^4.17.1",
     "pg": "^7.12.0",
-    "sequelize": "^5.12.1",
+    "sequelize": "^5.15.1",
     "session": "^0.1.0"
   },
   "devDependencies": {},
